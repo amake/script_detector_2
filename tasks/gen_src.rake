@@ -16,22 +16,6 @@ end
 
 CLOBBER.include(UNIHAN_ZIP)
 
-UNIHAN_READINGS = File.join(TMP_DIR, 'Unihan_Readings.txt')
-
-file UNIHAN_READINGS => UNIHAN_ZIP do |t|
-  extract_file(t.prerequisites.first, File.basename(t.name))
-end
-
-CLOBBER.include(UNIHAN_READINGS)
-
-UNIHAN_VARIANTS = File.join(TMP_DIR, 'Unihan_Variants.txt')
-
-file UNIHAN_VARIANTS => UNIHAN_ZIP do |t|
-  extract_file(t.prerequisites.first, File.basename(t.name))
-end
-
-CLOBBER.include(UNIHAN_VARIANTS)
-
 UNIHAN_DICT = File.join(TMP_DIR, 'Unihan_DictionaryLikeData.txt')
 
 file UNIHAN_DICT => UNIHAN_ZIP do |t|
@@ -54,11 +38,11 @@ end
 
 PATTERNS_FILE = File.join('lib', 'script_detector_2', 'patterns.gen.rb')
 
-file PATTERNS_FILE => [UNIHAN_READINGS, UNIHAN_VARIANTS, UNIHAN_DICT] do |t|
+file PATTERNS_FILE => [UNIHAN_DICT] do |t|
   require_relative 'unihan'
 
   dict_data = Unihan.parse_file(t.prerequisites.last)
-  ja_pattern = Unihan.gen_japanese_pattern(dict_data)
+  jpan_pattern = Unihan.gen_unihan_core_pattern(dict_data, 'J')
 
   File.open(t.name, 'w') do |out|
     out << <<~SRC
@@ -67,7 +51,7 @@ file PATTERNS_FILE => [UNIHAN_READINGS, UNIHAN_VARIANTS, UNIHAN_DICT] do |t|
       # This file is generated! Do not edit manually!
 
       module ScriptDetector2
-        JAPANESE_PATTERN = Regexp.new('#{ja_pattern}').freeze
+        JAPANESE_PATTERN = Regexp.new('#{jpan_pattern}').freeze
       end
     SRC
   end

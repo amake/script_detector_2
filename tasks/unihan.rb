@@ -6,13 +6,14 @@ module Unihan
 
   class << self
     # @param readings_data [Hash<Integer,Hash<String,String>>]
+    # @param tags [Array<String>]
     # @return [Regexp]
-    def gen_japanese_pattern(dict_data)
-      ja_codepoints = dict_data.select do |_, data|
-        data['kUnihanCore2020']&.include?('J')
+    def gen_unihan_core_pattern(dict_data, *tags)
+      codepoints = dict_data.select do |_, data|
+        tags.all? { |t| data['kUnihanCore2020']&.include?(t) }
       end.keys
 
-      gen_pattern(ja_codepoints)
+      gen_pattern(codepoints)
     end
 
     # @param codepoints [Array<Integer>]
