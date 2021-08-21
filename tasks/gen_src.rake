@@ -32,6 +32,14 @@ end
 
 CLOBBER.include(UNIHAN_VARIANTS)
 
+UNIHAN_DICT = File.join(TMP_DIR, 'Unihan_DictionaryLikeData.txt')
+
+file UNIHAN_DICT => UNIHAN_ZIP do |t|
+  extract_file(t.prerequisites.first, File.basename(t.name))
+end
+
+CLOBBER.include(UNIHAN_DICT)
+
 # @param zip [String]
 # @param entry_name [String]
 def extract_file(zip, entry_name)
@@ -46,11 +54,11 @@ end
 
 PATTERNS_FILE = File.join('lib', 'script_detector_2', 'patterns.gen.rb')
 
-file PATTERNS_FILE => [UNIHAN_READINGS, UNIHAN_VARIANTS] do |t|
+file PATTERNS_FILE => [UNIHAN_READINGS, UNIHAN_VARIANTS, UNIHAN_DICT] do |t|
   require_relative 'unihan'
 
-  readings_data = Unihan.parse_file(t.prerequisites.first)
-  ja_pattern = Unihan.gen_japanese_pattern(readings_data)
+  dict_data = Unihan.parse_file(t.prerequisites.last)
+  ja_pattern = Unihan.gen_japanese_pattern(dict_data)
 
   File.open(t.name, 'w') do |out|
     out << <<~SRC

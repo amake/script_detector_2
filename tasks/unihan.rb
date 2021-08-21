@@ -7,9 +7,9 @@ module Unihan
   class << self
     # @param readings_data [Hash<Integer,Hash<String,String>>]
     # @return [Regexp]
-    def gen_japanese_pattern(readings_data)
-      ja_codepoints = readings_data.select do |_, data|
-        data.key?('kJapaneseOn') || data.key?('kJapaneseKun')
+    def gen_japanese_pattern(dict_data)
+      ja_codepoints = dict_data.select do |_, data|
+        data['kUnihanCore2020']&.include?('J')
       end.keys
 
       gen_pattern(ja_codepoints)
