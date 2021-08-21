@@ -43,6 +43,9 @@ file PATTERNS_FILE => [UNIHAN_DICT] do |t|
 
   dict_data = Unihan.parse_file(t.prerequisites.last)
   jpan_pattern = Unihan.gen_unihan_core_pattern(dict_data, 'J')
+  hans_pattern = Unihan.gen_unihan_core_pattern(dict_data, 'G')
+  hant_pattern = Unihan.gen_unihan_core_pattern(dict_data, 'H', 'M', 'T')
+  kore_pattern = Unihan.gen_unihan_core_pattern(dict_data, 'K', 'P')
 
   File.open(t.name, 'w') do |out|
     out << <<~SRC
@@ -52,6 +55,9 @@ file PATTERNS_FILE => [UNIHAN_DICT] do |t|
 
       module ScriptDetector2
         JAPANESE_PATTERN = Regexp.new('#{jpan_pattern}').freeze
+        SIMPLIFIED_CHINESE_PATTERN = Regexp.new('#{hans_pattern}').freeze
+        TRADITIONAL_CHINESE_PATTERN = Regexp.new('#{hant_pattern}').freeze
+        KOREAN_PATTERN = Regexp.new('#{kore_pattern}').freeze
       end
     SRC
   end
