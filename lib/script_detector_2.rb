@@ -2,6 +2,7 @@
 
 require_relative 'script_detector_2/version'
 require_relative 'script_detector_2/patterns.gen'
+require_relative 'script_detector_2/string'
 
 # Detect the CJK script of a string
 module ScriptDetector2
