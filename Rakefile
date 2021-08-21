@@ -2,6 +2,7 @@
 
 require 'bundler/gem_tasks'
 require 'rake/testtask'
+Dir['tasks/**/*.rake'].each(&method(:load))
 
 Rake::TestTask.new(:test) do |t|
   t.libs << 'test'
@@ -14,3 +15,6 @@ require 'rubocop/rake_task'
 RuboCop::RakeTask.new
 
 task default: %i[test rubocop]
+
+desc 'Generate code'
+task generate: [PATTERNS_FILE]
