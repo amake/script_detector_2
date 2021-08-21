@@ -31,5 +31,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubyzip'
   spec.add_development_dependency 'solargraph'
 end

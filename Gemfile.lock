@@ -42,6 +42,7 @@ GEM
     rubocop-ast (1.10.0)
       parser (>= 3.0.1.1)
     ruby-progressbar (1.11.0)
+    rubyzip (2.3.2)
     solargraph (0.43.0)
       backport (~> 1.2)
       benchmark
@@ -70,6 +71,7 @@ DEPENDENCIES
   minitest (~> 5.0)
   rake (~> 13.0)
   rubocop (~> 1.7)
+  rubyzip
   script_detector_2!
   solargraph
 
