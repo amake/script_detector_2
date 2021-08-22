@@ -5,7 +5,7 @@ module Unihan
   CODEPOINT_PATTERN = /U\+(?<hex>[A-F0-9]+)/.freeze
 
   class << self
-    # @param readings_data [Hash<Integer,Hash<String,String>>]
+    # @param readings_data [Hash<Integer,Hash{String => String}>]
     # @param tags [Array<String>]
     # @return [Regexp]
     def gen_unihan_core_pattern(dict_data, *tags)
@@ -47,10 +47,11 @@ module Unihan
     end
 
     # @param data_file [String]
-    # @return [Hash<Integer,Hash<String,String>>]
+    # @return [Hash<Integer,Hash{String => String}>]
     def parse_file(data_file)
+      result = {}
+
       File.open(data_file) do |f|
-        result = {}
         f.each_line do |line|
           next if line.start_with?('#')
           next if line.empty?
@@ -64,9 +65,9 @@ module Unihan
           hash = result[cp_int] ||= {}
           hash[field] = data
         end
-
-        result
       end
+
+      result
     end
   end
 end
