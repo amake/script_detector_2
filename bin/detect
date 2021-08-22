@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'script_detector_2'
+
+input =
+  if ARGV.empty?
+    ARGF.read
+  else
+    ARGV.join
+  end
+
+puts(ScriptDetector2.identify_script(input))
