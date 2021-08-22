@@ -1,26 +1,21 @@
 name: Ruby
 
-on:
-  push:
-    - master
-
-  pull_request:
+on: [push,pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        ruby:
-          - 2.7.4
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true
-    - name: Run the default task
+        ruby-version: 2.7.4
+    - name: Install
+      run: |
+        gem install bundler -v 2.2.26
+        bundle install
+    - name: Type check
+      run: bundle exec solargraph typecheck --level typed
+    - name: Unit tests
       run: bundle exec rake
