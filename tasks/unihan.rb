@@ -22,6 +22,8 @@ module Unihan
       alts = group(codepoints).map do |first, last|
         if first == last
           format('\u{%x}', first)
+        elsif first.succ == last
+          format('\u{%<first>x}\u{%<last>x}', first: first, last: last)
         else
           format('\u{%<first>x}-\u{%<last>x}', first: first, last: last)
         end
