@@ -28,7 +28,7 @@ module Unihan
           format('\u{%<first>x}-\u{%<last>x}', first: first, last: last)
         end
       end
-      /[#{alts.join}]/
+      /\A[#{alts.join}]+\Z/
     end
 
     # @param codepoints [Array<Integer>]

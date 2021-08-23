@@ -55,6 +55,15 @@ These can be used directly as well:
 - `ScriptDetector2::KOREAN_PATTERN`: matches all Han characters in the
   kUnihanCore2020 set marked as ROK (K) or DPRK (P)
 
+Each of the above patterns matches an entire string containing only Han
+characters of the indicated script, i.e.
+
+```ruby
+ScriptDetector2::JAPANESE_PATTERN.match?('日本語') # => true
+ScriptDetector2::JAPANESE_PATTERN.match?('你好') # => false
+ScriptDetector2::JAPANESE_PATTERN.match?('Hello 日本語') # => false
+```
+
 To recreate the script_detector gem's extension of the String class, use the
 supplied refinement like so:
 
