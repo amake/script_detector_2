@@ -5,7 +5,7 @@ module Unihan
   CODEPOINT_PATTERN = /U\+(?<hex>[A-F0-9]+)/.freeze
 
   class << self
-    # @param readings_data [Hash<Integer,Hash{String => String}>]
+    # @param dict_data [Hash<Integer,Hash{String => String}>]
     # @param tags [Array<String>]
     # @return [Regexp]
     def gen_unihan_core_pattern(dict_data, *tags)
