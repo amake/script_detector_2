@@ -9,11 +9,16 @@ module Unihan
     # @param tags [Array<String>]
     # @return [Regexp]
     def gen_unihan_core_pattern(dict_data, *tags)
-      codepoints = dict_data.select do |_, data|
+      gen_pattern(codepoints_for_tags(dict_data, tags))
+    end
+
+    # @param dict_data [Hash<Integer,Hash{String => String}>]
+    # @param tags [Array<String>]
+    # @return [Array<Integer>]
+    def codepoints_for_tags(dict_data, tags)
+      dict_data.select do |_, data|
         tags.all? { |t| data['kUnihanCore2020']&.include?(t) }
       end.keys
-
-      gen_pattern(codepoints)
     end
 
     # @param codepoints [Array<Integer>]
