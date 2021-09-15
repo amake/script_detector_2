@@ -12,7 +12,7 @@ Unlike the original script_detector, this gem:
 - Uses the
   [kUnihanCore2020](https://www.unicode.org/reports/tr38/#kUnihanCore2020)
   property of the Unicode Unihan database to determine which characters belong
-  to which script (Unicode 13)
+  to which script (Unicode 14)
   ([details](http://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf))
 - Uses [ISO 15924 script names](https://en.wikipedia.org/wiki/ISO_15924) in
   symbol form as return values (instead of English strings)
