@@ -13,6 +13,7 @@ class ScriptDetector2Test < Minitest::Test
     refute(ScriptDetector2.japanese?(' 我的氣墊船充滿了鱔魚.'))
     refute(ScriptDetector2.japanese?(' 내 호버크라프트는 장어로 가득 차 있어요.'))
     refute(ScriptDetector2.japanese?(' Hello, world!'))
+    refute(ScriptDetector2.japanese?('123,456日元(含稅)'))
   end
 
   def test_kana?
@@ -30,6 +31,7 @@ class ScriptDetector2Test < Minitest::Test
     assert(ScriptDetector2.chinese?(' 我的氣墊船充滿了鱔魚.'))
     refute(ScriptDetector2.chinese?(' 내 호버크라프트는 장어로 가득 차 있어요.'))
     refute(ScriptDetector2.chinese?(' Hello, world!'))
+    assert(ScriptDetector2.chinese?('123,456日元(含稅)'))
   end
 
   def test_simplified_chinese?
@@ -38,6 +40,7 @@ class ScriptDetector2Test < Minitest::Test
     refute(ScriptDetector2.simplified_chinese?(' 我的氣墊船充滿了鱔魚.'))
     refute(ScriptDetector2.simplified_chinese?(' 내 호버크라프트는 장어로 가득 차 있어요.'))
     refute(ScriptDetector2.simplified_chinese?(' Hello, world!'))
+    refute(ScriptDetector2.simplified_chinese?('123,456日元(含稅)'))
   end
 
   def test_traditional_chinese?
@@ -46,6 +49,7 @@ class ScriptDetector2Test < Minitest::Test
     assert(ScriptDetector2.traditional_chinese?(' 我的氣墊船充滿了鱔魚.'))
     refute(ScriptDetector2.traditional_chinese?(' 내 호버크라프트는 장어로 가득 차 있어요.'))
     refute(ScriptDetector2.traditional_chinese?(' Hello, world!'))
+    assert(ScriptDetector2.traditional_chinese?('123,456日元(含稅)'))
   end
 
   def test_korean?
@@ -54,6 +58,7 @@ class ScriptDetector2Test < Minitest::Test
     refute(ScriptDetector2.korean?(' 我的氣墊船充滿了鱔魚.'))
     assert(ScriptDetector2.korean?(' 내 호버크라프트는 장어로 가득 차 있어요.'))
     refute(ScriptDetector2.korean?(' Hello, world!'))
+    assert(ScriptDetector2.korean?('123,456日元(含稅)'))
   end
 
   def test_hangul?
@@ -72,5 +77,6 @@ class ScriptDetector2Test < Minitest::Test
     assert_equal(:Kore, ScriptDetector2.identify_script(' 내 호버크라프트는 장어로 가득 차 있어요.'))
     assert_equal(:Hani, ScriptDetector2.identify_script(' 你好'))
     assert_equal(:Zyyy, ScriptDetector2.identify_script(' Hello, world!'))
+    assert_equal(:Hant, ScriptDetector2.identify_script('123,456日元(含稅)'))
   end
 end

@@ -76,14 +76,16 @@ module ScriptDetector2
     # @param string [String]
     # @return [Symbol]
     def identify_script(string)
-      return :Jpan if japanese?(string)
-      return :Kore if korean?(string)
+      return :Jpan if kana?(string)
+      return :Kore if hangul?(string)
 
       is_hant = traditional_chinese?(string)
       is_hans = simplified_chinese?(string)
       if is_hant && is_hans then :Hani
       elsif is_hans then :Hans
       elsif is_hant then :Hant
+      elsif japanese?(string) then :Jpan
+      elsif korean?(string) then :Kore
       elsif chinese?(string) then :Hani # rubocop:disable Lint/DuplicateBranch
       else :Zyyy
       end
