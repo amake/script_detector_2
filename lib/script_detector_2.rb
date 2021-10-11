@@ -87,7 +87,8 @@ module ScriptDetector2
       elsif japanese?(string) then :Jpan
       elsif korean?(string) then :Kore
       elsif chinese?(string) then :Hani # rubocop:disable Lint/DuplicateBranch
-      else :Zyyy
+      else
+        :Zyyy
       end
     end
   end
