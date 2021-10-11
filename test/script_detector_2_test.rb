@@ -15,6 +15,15 @@ class ScriptDetector2Test < Minitest::Test
     refute(ScriptDetector2.japanese?(' Hello, world!'))
   end
 
+  def test_kana?
+    assert(ScriptDetector2.kana?(' 私のホバークラフトは鰻でいっぱいです.'))
+    assert(ScriptDetector2.kana?('あいうえお'))
+    assert(ScriptDetector2.kana?('アイウエオ'))
+    refute(ScriptDetector2.kana?('亜'))
+    refute(ScriptDetector2.kana?(' 내 호버크라프트는 장어로 가득 차 있어요.'))
+    refute(ScriptDetector2.kana?(' Hello, world!'))
+  end
+
   def test_chinese?
     refute(ScriptDetector2.chinese?(' 私のホバークラフトは鰻でいっぱいです.'))
     assert(ScriptDetector2.chinese?(' 我的气垫船充满了鳝鱼.'))
@@ -45,6 +54,15 @@ class ScriptDetector2Test < Minitest::Test
     refute(ScriptDetector2.korean?(' 我的氣墊船充滿了鱔魚.'))
     assert(ScriptDetector2.korean?(' 내 호버크라프트는 장어로 가득 차 있어요.'))
     refute(ScriptDetector2.korean?(' Hello, world!'))
+  end
+
+  def test_hangul?
+    refute(ScriptDetector2.hangul?(' 私のホバークラフトは鰻でいっぱいです.'))
+    refute(ScriptDetector2.hangul?('あいうえお'))
+    refute(ScriptDetector2.hangul?('アイウエオ'))
+    refute(ScriptDetector2.hangul?('亜'))
+    assert(ScriptDetector2.hangul?(' 내 호버크라프트는 장어로 가득 차 있어요.'))
+    refute(ScriptDetector2.hangul?(' Hello, world!'))
   end
 
   def test_identify_script

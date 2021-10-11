@@ -10,13 +10,19 @@ module ScriptDetector2
     # @param string [String]
     # @return [Boolean]
     def japanese?(string)
-      return true if string =~ /[\p{Hiragana}\p{Katakana}]/
-      return false if string =~ /\p{Hangul}/
+      return true if kana?(string)
+      return false if hangul?(string)
 
       kanji = string.scan(/\p{Han}/)
       return false unless kanji.any?
 
       kanji.all?(JAPANESE_PATTERN)
+    end
+
+    # @param string [String]
+    # @return [Boolean]
+    def kana?(string)
+      /[\p{Hiragana}\p{Katakana}]/.match?(string)
     end
 
     # @param string [String]
@@ -52,13 +58,19 @@ module ScriptDetector2
     # @param string [String]
     # @return [Boolean]
     def korean?(string)
-      return true if string =~ /\p{Hangul}/
-      return false if string =~ /[\p{Hiragana}\p{Katakana}]/
+      return true if hangul?(string)
+      return false if kana?(string)
 
       hanja = string.scan(/\p{Han}/)
       return false unless hanja.any?
 
       hanja.all?(KOREAN_PATTERN)
+    end
+
+    # @param string [String]
+    # @return [Boolean]
+    def hangul?(string)
+      /\p{Hangul}/.match?(string)
     end
 
     # @param string [String]
