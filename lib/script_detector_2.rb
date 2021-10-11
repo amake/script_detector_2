@@ -24,7 +24,7 @@ module ScriptDetector2
     def chinese?(string)
       return false if string =~ /[\p{Hiragana}\p{Katakana}\p{Hangul}]/
 
-      string =~ /\p{Han}/
+      /\p{Han}/.match?(string)
     end
 
     # @param string [String]
