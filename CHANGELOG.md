@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [0.3.0] - 2021-10-13
+
+- Add `kana?` and `hangul?` methods
+- Improve accuracy of `identify_script` method
+- `chinese?` method now returns actual boolean instead of merely something
+  truthy
+
 ## [0.2.0] - 2021-08-23
 
 - Slight optimization of script-matching regexps
