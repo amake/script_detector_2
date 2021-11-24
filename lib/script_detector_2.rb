@@ -91,5 +91,19 @@ module ScriptDetector2
         :Zyyy
       end
     end
+
+    # @param string [String]
+    # @return [Array<Symbol>]
+    def identify_scripts(string)
+      result = []
+
+      result << :Hans if simplified_chinese?(string)
+      result << :Hant if traditional_chinese?(string)
+      result << :Jpan if japanese?(string)
+      result << :Kore if korean?(string)
+      result << :Zyyy if result.empty?
+
+      result
+    end
   end
 end

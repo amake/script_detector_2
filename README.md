@@ -42,6 +42,7 @@ The main detection methods are:
 - `ScriptDetector2.simplified_chinese?`
 - `ScriptDetector2.traditional_chinese?`
 - `ScriptDetector2.identify_script`
+- `ScriptDetector2.identify_scripts`
 
 Regexp patterns are used to identify the script to which Han characters belong.
 These can be used directly as well:
