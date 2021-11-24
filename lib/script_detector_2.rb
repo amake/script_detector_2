@@ -95,12 +95,21 @@ module ScriptDetector2
 
       is_hant = traditional_chinese?(string)
       is_hans = simplified_chinese?(string)
-      if is_hant && is_hans then :Hani
-      elsif is_hans then :Hans
+      return :Hani if is_hant && is_hans
+
+      is_japanese = japanese?(string)
+      return :Hani if is_japanese && (is_hant || is_hans)
+
+      # At this point we have determined that the string does not contain
+      # Hangul; for such a string to be Korean would be unusual. Allowing Korean
+      # to dilute the result to Hani is going to be a loss on average, so we
+      # don't handle it like Japanese above.
+
+      if is_hans then :Hans
       elsif is_hant then :Hant
-      elsif japanese?(string) then :Jpan
+      elsif is_japanese then :Jpan
       elsif korean?(string) then :Kore
-      elsif chinese?(string) then :Hani # rubocop:disable Lint/DuplicateBranch
+      elsif chinese?(string) then :Hani
       else
         :Zyyy
       end
