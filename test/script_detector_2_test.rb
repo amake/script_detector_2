@@ -75,7 +75,7 @@ class ScriptDetector2Test < Minitest::Test
     assert_equal(:Hans, ScriptDetector2.identify_script(' 我的气垫船充满了鳝鱼.'))
     assert_equal(:Hant, ScriptDetector2.identify_script(' 我的氣墊船充滿了鱔魚.'))
     assert_equal(:Kore, ScriptDetector2.identify_script(' 내 호버크라프트는 장어로 가득 차 있어요.'))
-    assert_equal(:Kore, ScriptDetector2.identify_script('乫'))
+    assert_equal(:Kore, ScriptDetector2.identify_script('乫')) # Korean-only ideograph
     assert_equal(:Hani, ScriptDetector2.identify_script(' 你好'))
     assert_equal(:Zyyy, ScriptDetector2.identify_script(' Hello, world!'))
     assert_equal(:Hant, ScriptDetector2.identify_script('123,456日元(含稅)'))
@@ -87,7 +87,7 @@ class ScriptDetector2Test < Minitest::Test
     assert_equal([:Hans], ScriptDetector2.identify_scripts(' 我的气垫船充满了鳝鱼.'))
     assert_equal([:Hant], ScriptDetector2.identify_scripts(' 我的氣墊船充滿了鱔魚.'))
     assert_equal([:Kore], ScriptDetector2.identify_scripts(' 내 호버크라프트는 장어로 가득 차 있어요.'))
-    assert_equal([:Kore], ScriptDetector2.identify_scripts('乫'))
+    assert_equal([:Kore], ScriptDetector2.identify_scripts('乫')) # Korean-only ideograph
     assert_equal(%i[Hans Hant], ScriptDetector2.identify_scripts(' 你好'))
     assert_equal([:Zyyy], ScriptDetector2.identify_scripts(' Hello, world!'))
     assert_equal(%i[Hant Kore], ScriptDetector2.identify_scripts('123,456日元(含稅)'))
