@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.4.0] - 2021-11-24
+
+- Add `identify_scripts` method
+- Improve accuracy of `identify_script` method
+
 ## [0.3.0] - 2021-10-13
 
 - Add `kana?` and `hangul?` methods

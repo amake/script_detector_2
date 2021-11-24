@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    script_detector_2 (0.3.0)
+    script_detector_2 (0.4.0)
 
 GEM
   remote: https://rubygems.org/
