@@ -80,6 +80,7 @@ class ScriptDetector2Test < Minitest::Test
     assert_equal(:Zyyy, ScriptDetector2.identify_script(' Hello, world!'))
     assert_equal(:Hant, ScriptDetector2.identify_script('123,456日元(含稅)'))
     assert_equal(:Hani, ScriptDetector2.identify_script('猫'))
+    assert_equal(:Hani, ScriptDetector2.identify_script('椩')) # Not in kUnihanCore2020
   end
 
   def test_identify_scripts
@@ -92,5 +93,6 @@ class ScriptDetector2Test < Minitest::Test
     assert_equal([:Zyyy], ScriptDetector2.identify_scripts(' Hello, world!'))
     assert_equal(%i[Hant Kore], ScriptDetector2.identify_scripts('123,456日元(含稅)'))
     assert_equal(%i[Hans Jpan Kore], ScriptDetector2.identify_scripts('猫'))
+    assert_equal([:Hani], ScriptDetector2.identify_scripts('椩')) # Not in kUnihanCore2020
   end
 end

@@ -135,6 +135,7 @@ module ScriptDetector2
       result << :Hant if traditional_chinese?(string)
       result << :Jpan if japanese?(string)
       result << :Kore if korean?(string)
+      result << :Hani if chinese?(string) && result.empty?
       result << :Zyyy if result.empty?
 
       result
