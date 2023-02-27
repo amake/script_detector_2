@@ -76,7 +76,7 @@ DEPENDENCIES
   byebug
   minitest (~> 5.0)
   rake (~> 13.0)
-  rubocop (~> 1.7)
+  rubocop
   rubyzip
   script_detector_2!
   solargraph
