@@ -2,7 +2,7 @@
 
 TMP_DIR = 'tmp'
 UNIHAN_ZIP = File.join(TMP_DIR, 'Unihan.zip')
-UNIHAN_URL = 'https://www.unicode.org/Public/14.0.0/ucd/Unihan.zip'
+UNIHAN_URL = 'https://www.unicode.org/Public/15.0.0/ucd/Unihan.zip'
 
 directory TMP_DIR
 
